@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ayra — Safe Video Player for Kids</title>
+<meta name="description" content="The video player built for parents. No ads, no algorithms, no tracking. Just safe, locked-down playback your kids can't escape.">
+<meta property="og:title" content="Ayra — Safe Video Player for Kids">
+<meta property="og:description" content="Hand your phone to your kid without worry. Ayra locks them into playlists you choose.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ttvsub2live.github.io/Arya-App/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --coral: #E8856C;
+  --coral-deep: #D4715A;
+  --coral-light: #F4A68C;
+  --peach: #FFF3EE;
+  --cream: #FFF9F7;
+  --plum: #9B59B6;
+  --sky: #4DA6E8;
+  --navy: #2C1810;
+  --warm-gray: #6B5750;
+  --soft-border: #FDE8E0;
+  --shadow-warm: rgba(232, 133, 108, 0.15);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', -apple-system, sans-serif;
+  background: var(--cream);
+  color: var(--navy);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============ HERO ============ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 6rem 2rem 4rem;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  right: -20%;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, var(--shadow-warm) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -20%;
+  left: -15%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(77, 166, 232, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-text { max-width: 560px; }
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--peach);
+  border: 1px solid var(--soft-border);
+  border-radius: 100px;
+  padding: 0.4rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--coral-deep);
+  margin-bottom: 1.5rem;
+  animation: fadeInUp 0.6s ease both;
+}
+
+.hero h1 {
+  font-family: 'Nunito', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 900;
+  line-height: 1.1;
+  color: var(--navy);
+  margin-bottom: 1.2rem;
+  animation: fadeInUp 0.6s ease 0.1s both;
+}
+
+.hero h1 span {
+  background: linear-gradient(135deg, var(--coral), var(--plum));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-size: 1.2rem;
+  line-height: 1.7;
+  color: var(--warm-gray);
+  margin-bottom: 2rem;
+  max-width: 480px;
+  animation: fadeInUp 0.6s ease 0.2s both;
+}
+
+.hero-cta {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  animation: fadeInUp 0.6s ease 0.3s both;
+}
+
+.app-store-badge {
+  transition: transform 0.2s ease;
+}
+.app-store-badge:hover { transform: scale(1.05); }
+.app-store-badge img { height: 52px; }
+
+.hero-price {
+  font-size: 0.95rem;
+  color: var(--warm-gray);
+  font-weight: 500;
+}
+.hero-price strong {
+  color: var(--coral-deep);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.hero-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  animation: fadeInUp 0.8s ease 0.4s both;
+}
+
+.hero-screenshot {
+  width: 320px;
+  border-radius: 24px;
+  box-shadow:
+    0 20px 60px rgba(44, 24, 16, 0.12),
+    0 8px 24px var(--shadow-warm);
+  transform: rotate(2deg);
+  transition: transform 0.4s ease;
+}
+.hero-screenshot:hover { transform: rotate(0deg) scale(1.02); }
+
+.floating-badge {
+  position: absolute;
+  background: white;
+  border-radius: 16px;
+  padding: 0.8rem 1.2rem;
+  box-shadow: 0 8px 30px rgba(44, 24, 16, 0.1);
+  font-size: 0.85rem;
+  font-weight: 600;
+  animation: float 3s ease-in-out infinite;
+}
+
+.floating-badge.top-left {
+  top: 10%;
+  left: -10%;
+  color: var(--plum);
+}
+
+.floating-badge.bottom-right {
+  bottom: 15%;
+  right: -5%;
+  color: var(--sky);
+  animation-delay: 1.5s;
+}
+
+/* ============ TRUST BAR ============ */
+.trust-bar {
+  background: white;
+  border-top: 1px solid var(--soft-border);
+  border-bottom: 1px solid var(--soft-border);
+  padding: 2rem;
+}
+
+.trust-bar-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--warm-gray);
+}
+
+.trust-icon {
+  font-size: 1.4rem;
+}
+
+/* ============ FEATURES ============ */
+.features {
+  padding: 6rem 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-label {
+  display: inline-block;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--coral);
+  margin-bottom: 0.8rem;
+}
+
+.section-title {
+  font-family: 'Nunito', sans-serif;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 900;
+  color: var(--navy);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.section-sub {
+  font-size: 1.1rem;
+  color: var(--warm-gray);
+  max-width: 600px;
+  line-height: 1.6;
+  margin-bottom: 3.5rem;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.feature-card {
+  background: white;
+  border: 1px solid var(--soft-border);
+  border-radius: 20px;
+  padding: 2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px var(--shadow-warm);
+}
+
+.feature-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  margin-bottom: 1.2rem;
+}
+
+.feature-icon.coral { background: var(--peach); }
+.feature-icon.purple { background: #F3E8FF; }
+.feature-icon.blue { background: #E8F4FD; }
+.feature-icon.green { background: #E8FFF0; }
+.feature-icon.orange { background: #FFF3E0; }
+.feature-icon.pink { background: #FFE8F0; }
+
+.feature-card h3 {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 0.5rem;
+}
+
+.feature-card p {
+  font-size: 0.95rem;
+  color: var(--warm-gray);
+  line-height: 1.6;
+}
+
+/* ============ SCREENSHOTS ============ */
+.screenshots {
+  padding: 6rem 2rem;
+  background: white;
+  overflow: hidden;
+}
+
+.screenshots-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.screenshot-scroll {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  padding: 2rem 0;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.screenshot-scroll::-webkit-scrollbar { display: none; }
+
+.screenshot-item {
+  flex: 0 0 260px;
+  scroll-snap-align: center;
+  transition: transform 0.3s ease;
+}
+
+.screenshot-item:hover { transform: scale(1.03); }
+
+.screenshot-item img {
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(44, 24, 16, 0.1);
+}
+
+/* ============ PRIVACY SECTION ============ */
+.privacy-section {
+  padding: 6rem 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.privacy-card {
+  background: linear-gradient(135deg, #1a1225 0%, #2C1810 100%);
+  border-radius: 28px;
+  padding: 4rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.privacy-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(232, 133, 108, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.privacy-text { position: relative; z-index: 1; }
+
+.privacy-text .section-label { color: var(--coral-light); }
+
+.privacy-text .section-title {
+  color: white;
+  margin-bottom: 1.2rem;
+}
+
+.privacy-text p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.privacy-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  position: relative;
+  z-index: 1;
+}
+
+.privacy-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 1rem 1.2rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.privacy-list .check {
+  color: #6FCF97;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+/* ============ CTA ============ */
+.cta-section {
+  padding: 6rem 2rem;
+  text-align: center;
+  background: linear-gradient(180deg, white 0%, var(--cream) 100%);
+}
+
+.cta-inner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.cta-icon {
+  font-size: 3.5rem;
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+.cta-section .section-title {
+  margin-bottom: 0.8rem;
+}
+
+.cta-sub {
+  font-size: 1.1rem;
+  color: var(--warm-gray);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.cta-price-block {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  background: var(--peach);
+  border: 1px solid var(--soft-border);
+  border-radius: 100px;
+  padding: 0.6rem 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.cta-price-block .price {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--coral-deep);
+}
+
+.cta-price-block .price-note {
+  font-size: 0.85rem;
+  color: var(--warm-gray);
+  font-weight: 500;
+}
+
+/* ============ FOOTER ============ */
+footer {
+  background: var(--navy);
+  color: rgba(255, 255, 255, 0.5);
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.footer-inner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: var(--coral-light); }
+
+.footer-copy { font-size: 0.8rem; }
+
+/* ============ ANIMATIONS ============ */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 768px) {
+  .hero { padding: 4rem 1.5rem 3rem; }
+
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    text-align: center;
+  }
+
+  .hero-text { max-width: 100%; }
+  .hero-sub { max-width: 100%; margin-left: auto; margin-right: auto; }
+
+  .hero-cta {
+    justify-content: center;
+  }
+
+  .hero-screenshot { width: 240px; }
+
+  .floating-badge { display: none; }
+
+  .trust-bar-inner { gap: 1.5rem; }
+
+  .features { padding: 4rem 1.5rem; }
+  .features-grid { grid-template-columns: 1fr; }
+
+  .screenshot-item { flex: 0 0 200px; }
+
+  .privacy-card {
+    grid-template-columns: 1fr;
+    padding: 2.5rem 1.5rem;
+  }
+
+  .screenshots { padding: 4rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-badge">🛡️ Built by parents, for parents</div>
+      <h1>Screen time<br>without the <span>anxiety.</span></h1>
+      <p class="hero-sub">
+        Ayra is a locked-down video player that puts you in control. 
+        Your kids watch what you pick. No ads, no algorithms, no way out.
+      </p>
+      <div class="hero-cta">
+        <a href="#" class="app-store-badge" aria-label="Download on the App Store">
+          <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
+        </a>
+        <span class="hero-price"><strong>$3.99</strong> one-time. Forever.</span>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <img src="screenshots/01-home.png" alt="Ayra app home screen showing playlists" class="hero-screenshot">
+      <div class="floating-badge top-left">🔒 Kid-Proof</div>
+      <div class="floating-badge bottom-right">📺 No Ads Ever</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRUST BAR ============ -->
+<div class="trust-bar">
+  <div class="trust-bar-inner">
+    <div class="trust-item">
+      <span class="trust-icon">🔐</span>
+      Zero Data Collected
+    </div>
+    <div class="trust-item">
+      <span class="trust-icon">🚫</span>
+      No Ads, No Tracking
+    </div>
+    <div class="trust-item">
+      <span class="trust-icon">💳</span>
+      No Subscriptions
+    </div>
+    <div class="trust-item">
+      <span class="trust-icon">👶</span>
+      Ages 5 &amp; Under
+    </div>
+  </div>
+</div>
+
+<!-- ============ FEATURES ============ -->
+<section class="features reveal">
+  <span class="section-label">Why Parents Love Ayra</span>
+  <h2 class="section-title">Everything you need.<br>Nothing you don't.</h2>
+  <p class="section-sub">
+    No accounts. No servers. No "premium tier." Just a safe video player that works 
+    the moment you open it.
+  </p>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon coral">🔒</div>
+      <h3>Guided Mode</h3>
+      <p>Full-screen, locked player. Kids see only the video. No home button, no swiping away, no "up next" surprises. Only a parent can exit.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon purple">🧮</div>
+      <h3>4 Unlock Methods</h3>
+      <p>PIN code, easy math, hard math, or pattern lock. Pick what works for your kid's age. Switch anytime from settings.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon blue">📺</div>
+      <h3>YouTube Without YouTube</h3>
+      <p>Import any public playlist. No YouTube app needed, no ads injected, no algorithm-driven rabbit holes. Just the videos you chose.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon green">⏭️</div>
+      <h3>Skip Limits</h3>
+      <p>Set how many times kids can skip. Animated warnings let them know when they're running low. No meltdowns, just gentle guardrails.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon orange">⏰</div>
+      <h3>Screen Time Timer</h3>
+      <p>Set a timer, walk away. When time's up, a friendly lockout screen appears. No arguments about "five more minutes."</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon pink">📁</div>
+      <h3>Local Videos Too</h3>
+      <p>Use videos from your camera roll or files. Home videos, downloaded shows, educational content. Mix them with YouTube in the same playlist.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SCREENSHOTS ============ -->
+<section class="screenshots reveal">
+  <div class="screenshots-inner">
+    <span class="section-label">See It In Action</span>
+    <h2 class="section-title">Designed for tiny fingers.<br>Controlled by you.</h2>
+
+    <div class="screenshot-scroll">
+      <div class="screenshot-item">
+        <img src="screenshots/01-home.png" alt="Home screen" loading="lazy">
+      </div>
+      <div class="screenshot-item">
+        <img src="screenshots/02-kid-mode.png" alt="Kid mode launch" loading="lazy">
+      </div>
+      <div class="screenshot-item">
+        <img src="screenshots/05-settings.png" alt="Parental controls" loading="lazy">
+      </div>
+      <div class="screenshot-item">
+        <img src="screenshots/06-math-gate.png" alt="Math gate unlock" loading="lazy">
+      </div>
+      <div class="screenshot-item">
+        <img src="screenshots/07-kid-player.png" alt="Kid player in action" loading="lazy">
+      </div>
+      <div class="screenshot-item">
+        <img src="screenshots/09-welcome.png" alt="Setup guide" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRIVACY ============ -->
+<section class="privacy-section reveal">
+  <div class="privacy-card">
+    <div class="privacy-text">
+      <span class="section-label">Privacy First</span>
+      <h2 class="section-title">We can't see your data.<br>Because there isn't any.</h2>
+      <p>
+        Ayra has no backend, no analytics, no tracking pixels, no accounts. 
+        Everything lives on your device. We couldn't see your data even if we wanted to.
+      </p>
+      <p>
+        COPPA compliant by design. Not because we had to check boxes, 
+        but because we never built the infrastructure to collect anything.
+      </p>
+    </div>
+    <ul class="privacy-list">
+      <li><span class="check">✓</span> No user accounts or sign-ups</li>
+      <li><span class="check">✓</span> No analytics or crash reporting</li>
+      <li><span class="check">✓</span> No advertising SDKs</li>
+      <li><span class="check">✓</span> No server or cloud storage</li>
+      <li><span class="check">✓</span> No cookies or device fingerprinting</li>
+      <li><span class="check">✓</span> No third-party data sharing</li>
+      <li><span class="check">✓</span> COPPA compliant</li>
+      <li><span class="check">✓</span> All data stored locally on-device</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="cta-section reveal">
+  <div class="cta-inner">
+    <span class="cta-icon">🛡️</span>
+    <h2 class="section-title">Your kids deserve a safe screen.</h2>
+    <p class="cta-sub">
+      No subscriptions. No in-app purchases. No ads. 
+      Pay once, own it forever.
+    </p>
+    <div class="cta-price-block">
+      <span class="price">$3.99</span>
+      <span class="price-note">one-time purchase</span>
+    </div>
+    <br><br>
+    <a href="#" class="app-store-badge" aria-label="Download on the App Store">
+      <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
+    </a>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="support.html">Support & FAQ</a>
+      <a href="mailto:aryaappdevteam@gmail.com">Contact</a>
+    </div>
+    <p class="footer-copy">© 2026 Ayra App. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- ============ SCROLL REVEAL ============ -->
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
